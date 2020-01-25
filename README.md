@@ -1,2 +1,2 @@
-# api-anti-fraud-control
-API Rest para Controle de Antifraude de CPF
+# API Anti-fraud Control
+API REST para Controle de Antifraude de CPF

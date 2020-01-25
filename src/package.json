@@ -1,0 +1,20 @@
+{
+  "name": "api-anti-fraud-control-cpf",
+  "version": "1.0.0",
+  "description": "API REST para Controle de Antifraude de CPF",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "api",
+    "rest",
+    "test",
+    "back-end"
+  ],
+  "author": "Estêvão Silva",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

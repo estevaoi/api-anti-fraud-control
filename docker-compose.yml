@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  php:
+    container_name: 'api-anti-fraud-control'
+    build: .
+    image: api-antifraudcontrol:1.0
+    ports:
+      - "7000:7000"
+    environment:
+      - TZ=America/Sao_Paulo
+    volumes:
+      - "./src:/var/www/html/api-anti-fraud-control"
