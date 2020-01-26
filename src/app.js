@@ -1,15 +1,39 @@
 const express = require('express');
 const app = express();
-const bodyParser = require('body-parser');
 
 const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 
 const controllerRegisters = require('./controller/registersController');
 
+/**
+ * Receber dados somente no formato Json
+ */
+const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
 
+/**
+ * Permitir Acesso de todas as origens
+ */
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header(
+        'Access-Control-Allow-Headers',
+        'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+    );
+
+    if(req.method === 'OPTIONS'){
+        res.header('Access-Control-Allow-Methods', 'GET, POST, DELETE');
+        return res.status(200).send({});
+    }
+
+    next();
+});
+
+/**
+ * Configurações/Parâmetros para a documentação em Swagger
+ */
 const swaggerOptions = {
     swaggerDefinition: {
         info: {
@@ -28,20 +52,6 @@ const swaggerOptions = {
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
-app.use('/cpf', controllerRegisters);
-app.use((req, res, next) => {
-    const error = new Error('Not Found');
-    error.status = 404;
-    next(error);
-});
-app.use((error, req, res, next) => {
-    res.status(error.status || 500);
-    return res.send({
-        error: {
-            message: error.message
-        }
-    });
-});
 
 /**
  * @swagger
@@ -116,5 +126,22 @@ app.use((error, req, res, next) => {
  *        '400':
  *          description: Bad Request
  */
+
+app.use('/cpf', controllerRegisters);
+
+app.use((req, res, next) => {
+    const error = new Error('Not Found');
+    error.status = 404;
+    next(error);
+});
+
+app.use((error, req, res, next) => {
+    res.status(error.status || 500);
+    return res.send({
+        error: {
+            message: error.message
+        }
+    });
+});
 
 module.exports = app;
