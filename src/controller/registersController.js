@@ -1,11 +1,24 @@
 const express = require('express');
+const validator = require('cpf-check');
+
+
 const router = express.Router();
 
 router.post('/', (req, res, next) => {
-    res.status(400).send({
-        type: 'InvalidCpfException',
-        message: 'CPF is not valid.'
-    });
+
+    const numberCpf = req.body.cpf;
+
+    if (!validator.validate(numberCpf)) {
+        res.status(400).send({
+            type: 'InvalidCpfException',
+            message: 'CPF is not valid..'
+        });
+    }
+    else {
+        res.status(200).send({
+            message: 'Adicionando o CPF ' + numberCpf
+        });
+    }
 });
 
 router.get('/', (req, res, next) => {
@@ -15,22 +28,37 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/:cpf', (req, res, next) => {
+
     const numberCpf = req.params.cpf;
 
-    if (numberCpf == 000) {
-
+    if (!validator.validate(numberCpf)) {
+        res.status(400).send({
+            type: 'InvalidCpfException',
+            message: 'CPF is not valid.'
+        });
     }
-
-    res.status(200).send({
-        message: 'Monstrando um CPF'
-    });
+    else {
+        res.status(200).send({
+            message: 'Monstrando o CPF ' + numberCpf
+        });
+    }
 });
 
 router.delete('/:cpf', (req, res, next) => {
-    res.status(401).send({
-        type: 'InvalidCpfException',
-        message: 'CPF is not valid.'
-    });
+
+    const numberCpf = req.params.cpf;
+
+    if (!validator.validate(numberCpf)) {
+        res.status(400).send({
+            type: 'InvalidCpfException',
+            message: 'CPF is not valid.'
+        });
+    }
+    else {
+        res.status(200).send({
+            message: 'Removendo o CPF ' + numberCpf
+        });
+    }
 });
 
 module.exports = router;
