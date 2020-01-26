@@ -69,7 +69,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
  *            - cpf
  *          properties:
  *            cpf:
- *              type: number
+ *              type: string
  *    responses:
  *      '201':
  *        description: Successful Registration
@@ -100,7 +100,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
  *        description: Number of CPF
  *        required: true
  *        schema:
- *          type: number
+ *          type: string
  *    responses:
  *      '200':
  *        description: A successful response
@@ -119,7 +119,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
  *          description: Number of CPF
  *          required: true
  *          schema:
- *            type: number
+ *            type: string
  *      responses:
  *        '201':
  *          description: Successfully deleted
