@@ -146,7 +146,7 @@ router.get('/:cpf', (req, res, next) => {
 
 router.delete('/:cpf', (req, res, next) => {
 
-    const numberCpf = req.params.cpf.toString().replace(/[^0-9]/g, '');;
+    const numberCpf = req.params.cpf.toString().replace(/[^0-9]/g, '');
 
     if (!validatorCpf.validate(numberCpf)) {
         return res.status(400).send({
