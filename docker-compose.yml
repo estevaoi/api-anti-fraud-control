@@ -6,7 +6,7 @@ services:
     container_name: api-rest-container
     restart: always
     volumes:
-        - ./:/home/node/app
+        - ./:/usr/app
+    command: npm start
     ports:
       - "7070:7070"
-    command: node server.js
