@@ -25,6 +25,7 @@ services:
     restart: always
     volumes:
         - ./:/app
+        - /node_modules
     command: npm start
     ports:
       - "7070:7070"
