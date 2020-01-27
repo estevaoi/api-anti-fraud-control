@@ -6,7 +6,7 @@ services:
     container_name: api-rest-container
     restart: always
     volumes:
-        - ./:/usr/app
+        - ./:/app
     command: npm start
     ports:
       - "7070:7070"
