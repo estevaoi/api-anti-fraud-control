@@ -187,7 +187,7 @@ router.delete('/:cpf', (req, res, next) => {
                                 description: 'Add a new CPF',
                                 url: 'http://localhost:7070/cpf/',
                                 body: {
-                                    cpf: 'Number'
+                                    cpf: 'String'
                                 }
                             }
                         }
