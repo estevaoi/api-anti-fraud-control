@@ -1,6 +1,24 @@
 version: '3'
 
 services:
+  maxmilhas:
+    image: mysql:5.6
+    container_name: db-mysql-test-maxmilhas
+    environment:
+      MYSQL_ROOT_PASSWORD: maxmilhas
+      MYSQL_DATABASE: maxmilhas
+      MYSQL_USER: maxmilhas
+      MYSQL_PASSWORD: maxmilhas
+    ports:
+      - "3306:3306"
+    networks:
+      - backend
+    expose:
+      - "3306"
+    volumes:
+      - ./db/maxmilhas.sql:/docker-entrypoint-initdb.d/maxmilhas.sql
+      - ./db_data:/var/lib/mysql
+    restart: always
   api:
     build: .
     container_name: api-rest-test-maxmilhas
@@ -10,3 +28,10 @@ services:
     command: npm start
     ports:
       - "7070:7070"
+    networks:
+      - backend
+    depends_on:
+      - maxmilhas
+networks:
+  backend:
+    driver: "bridge"
