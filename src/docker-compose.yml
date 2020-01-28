@@ -17,15 +17,14 @@ services:
       - "3306"
     volumes:
       - ./db/maxmilhas.sql:/docker-entrypoint-initdb.d/maxmilhas.sql
-      - ./db_data:/var/lib/mysql
     restart: always
   api:
     build: .
     container_name: api-rest-test-maxmilhas
     restart: always
     volumes:
-        - ./:/app
-        - /node_modules
+        - ./:/usr/app/
+        - /usr/app/node_modules
     command: npm start
     ports:
       - "7070:7070"
