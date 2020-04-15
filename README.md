@@ -20,7 +20,7 @@ https://github.com/estevaoi/api-anti-fraud-control.git
 ```
 cd src
 
-docker-compose up –build -d
+docker-compose up -d --build
 ```
 
 ## Endereços URL:
